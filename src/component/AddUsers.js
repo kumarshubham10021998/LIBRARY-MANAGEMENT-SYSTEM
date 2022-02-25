@@ -5,38 +5,27 @@ import { useHistory } from "react-router-dom";
 const AddUsers = () => {
     let history = useHistory();
     const [user, setUser] = useState({
-        id: "",
+        
         bookname: "",
         bookauthor: "",  
         booklan: "",
        
       });
-      const {id,bookname,bookauthor,booklan} = user
+      const {bookname,bookauthor,booklan} = user
       const onInputChange = e=>{
           setUser({...user,[e.target.name]:e.target.value})
       }; 
       const onSubmit= async e => {
         e.preventDefault();
           await axios.post("/books/", user);
-          history.push("/");
+          history.push("/home");
       }
   return (
     <div className="container">
       <div className="w-75 mx-auto shadow p-5">
         <h2 className="text-center mb-4">Add A User</h2>
         <form onSubmit={e => onSubmit(e)}>
-          <div className="form-group my-2">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Enter ID"
-              name="id"
-              value={id}
-              onChange={e =>onInputChange(e)}
-              
-             
-            />
-          </div>
+          
           <div className="form-group my-2">
             <input
               type="text"

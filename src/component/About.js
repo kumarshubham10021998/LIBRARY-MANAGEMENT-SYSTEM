@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { unstable_renderSubtreeIntoContainer } from 'react-dom/cjs/react-dom.development'
+
 
 export default function About() {
     const [mystyle, setMystyle] = useState({

@@ -15,14 +15,14 @@ const Home = () => {
 
   const loadUsers = async () => {
     const result = await axios.get("/books");
-    console.log(result)
-    setUsers(result.data.reverse());
+ 
+    setUsers(result.data);
   };
-
-  // const deleteUser = async id => {
-  //   await axios.delete(`http://65.2.132.62:8080/Books/`);
-  //   loadUsers();
-  // };
+const deleteUser = async id=>{ 
+await axios.delete(`/books/${id}`)
+loadUsers();
+}
+  
   return (
     <div className="container">
       <div className="py-4">
@@ -30,8 +30,7 @@ const Home = () => {
         <table className="table border shadow ">
           <thead className="thead-dark">
             <tr>
-            <th scope="col">#</th>
-              <th scope="col">id</th>
+            <th scope="col">id</th>
               <th scope="col">Book Name</th>
               <th scope="col">Book Author</th>
               <th scope="col">Book Language</th>
@@ -40,17 +39,25 @@ const Home = () => {
           </thead>
           <tbody>
             {users.map((Books, index) => (
-              <tr>
+              <tr key={Books.id}>
                 <th users="row">{index + 1}</th>
                 
-                <td>{Books.id}</td>
+                
                 <td>{Books.bookname}</td>
                 <td>{Books.bookauthor}</td>
                 <td>{Books.booklan}</td>
                 <td>
-                  <Link class="btn btn-primary mr-2 ms-2"> View</Link>
-                  <Link class="btn btn-outline-primary mr-2 mx-2" >Edit</Link>
-                  <Link class="btn btn-danger mx-2"> Delete</Link>
+                  
+                  <Link className="btn btn-primary mr-2 ms-2" to={`/books/ ${Books.id}`}> View</Link>
+                 
+
+                  
+                  <Link className="btn btn-outline-primary mr-2 mx-2" to = {`component/Edit/ ${Books.id}`}>Edit</Link>
+                  
+
+                  
+                  <Link className="btn btn-danger mx-2" onClick={()=>deleteUser(Books.id)} to="/"> Delete</Link>
+                  
                 </td>
               </tr>
             ))}
